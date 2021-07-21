@@ -30,6 +30,6 @@ public class CriaAutor {
 		Autor autor = autorForm.converter();
 		autorRepository.save(autor);
 //		URI uri = uriBuilder.path("/criaAutor/{id}").buildAndExpand(autor.getId()).toUri();
-		return ResponseEntity.status(HttpStatus.CREATED).body(autor.converterDto());
+		return ResponseEntity.status(HttpStatus.OK).body(autor.converterDto());
 	}
 }

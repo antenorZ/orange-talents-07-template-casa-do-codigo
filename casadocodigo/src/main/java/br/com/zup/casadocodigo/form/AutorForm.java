@@ -6,6 +6,7 @@ import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.Length;
 
+import br.com.zup.casadocodigo.config.validation.Unique;
 import br.com.zup.casadocodigo.model.Autor;
 
 public class AutorForm {
@@ -14,6 +15,7 @@ public class AutorForm {
 	private String nome;
 	
 	@Email @NotNull @NotBlank
+	@Unique
 	private String email;
 	
 	@NotNull @NotBlank @Length(max = 400)
