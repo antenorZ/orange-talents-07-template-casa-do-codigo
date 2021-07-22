@@ -19,8 +19,8 @@ import br.com.zup.casadocodigo.model.Autor;
 import br.com.zup.casadocodigo.repository.AutorRepository;
 
 @RestController
-@RequestMapping("/criaAutor")
-public class CriaAutor {
+@RequestMapping("/autores")
+public class Autores {
 	
 	@Autowired
 	private AutorRepository autorRepository; 

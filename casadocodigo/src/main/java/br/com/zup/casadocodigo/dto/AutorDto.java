@@ -39,8 +39,4 @@ public class AutorDto {
 		return momentoRegistro;
 	}
 	
-	
-//	public static Page<AutorDto> converter(Page<Autor> autores){
-//		return autores.map(AutorDto::new);
-//	}
 }
