@@ -13,11 +13,13 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
 @Constraint(validatedBy = UniqueValidator.class)
 public @interface Unique{
  
-    String message() default "Email já cadastrado.";
+    String message() default "Já existe uma valor cadastrado para o campo especificado";
  
     Class<?>[] groups() default {};
  
     Class<? extends Payload>[] payload() default {};
- 
-    String value() default "";
-}
+    
+    String fieldName();
+    
+    Class<?> domainClass();
+ }

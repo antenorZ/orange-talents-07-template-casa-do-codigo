@@ -1,31 +1,36 @@
 package br.com.zup.casadocodigo.config.validation;
 
+import java.util.List;
+
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.util.Assert;
 
-import br.com.zup.casadocodigo.repository.AutorRepository;
-
-public class UniqueValidator implements ConstraintValidator<Unique, String> {
- 
-	@Autowired
-	private AutorRepository autorRepository;
+public class UniqueValidator implements ConstraintValidator<Unique, Object> {
 	
-    private String value;
+	private String domainAttribute;
+	
+	private Class<?> klass;
+	
+	@PersistenceContext
+	private EntityManager manager;
  
     @Override
-    public void initialize(Unique constraintAnnotation) {
-        this.value = constraintAnnotation.value();
+    public void initialize(Unique params) {
+        domainAttribute = params.fieldName();
+        klass = params.domainClass();
     }
  
     @Override
-    public boolean isValid(String value, ConstraintValidatorContext constraintValidatorContext) {
-    	if(autorRepository.existsByemail(value)) {
-    		return false;
-    	}
-    	else {
-    		return true;
-    	}
+    public boolean isValid(Object value, ConstraintValidatorContext context) {
+    	Query query = manager.createQuery("select 1 from " +klass.getName()+" where " +domainAttribute +"=:value");
+    	query.setParameter("value", value);
+    	List<?> list = query.getResultList();
+    	Assert.state(list.size() <= 1);
+    	return list.isEmpty();
     }
 }

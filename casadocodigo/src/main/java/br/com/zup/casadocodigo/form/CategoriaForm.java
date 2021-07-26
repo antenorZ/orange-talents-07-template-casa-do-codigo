@@ -6,13 +6,19 @@ import javax.validation.constraints.NotNull;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonCreator.Mode;
 
+import br.com.zup.casadocodigo.config.validation.Unique;
 import br.com.zup.casadocodigo.model.Categoria;
 
 public class CategoriaForm {
 	@NotNull @NotBlank
+	@Unique(domainClass = Categoria.class, fieldName = "titulo")
 	private String titulo;
 	
-	@JsonCreator(mode = Mode.PROPERTIES)
+	public CategoriaForm(){
+		
+	}
+	
+//	@JsonCreator(mode = Mode.PROPERTIES)
 	public CategoriaForm(String titulo) {
 		super();
 		this.titulo = titulo;

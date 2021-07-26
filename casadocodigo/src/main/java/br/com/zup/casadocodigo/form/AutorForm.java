@@ -8,6 +8,7 @@ import org.hibernate.validator.constraints.Length;
 
 import br.com.zup.casadocodigo.config.validation.Unique;
 import br.com.zup.casadocodigo.model.Autor;
+import br.com.zup.casadocodigo.model.Categoria;
 
 public class AutorForm {
 	
@@ -15,7 +16,7 @@ public class AutorForm {
 	private String nome;
 	
 	@Email @NotNull @NotBlank
-	@Unique
+	@Unique(domainClass = Autor.class, fieldName = "email")
 	private String email;
 	
 	@NotNull @NotBlank @Length(max = 400)
