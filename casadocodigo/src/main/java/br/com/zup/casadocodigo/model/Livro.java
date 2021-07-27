@@ -47,6 +47,14 @@ public class Livro {
 		
 	}
 	
+	public Long getId() {
+		return id;
+	}
+	
+	public String getTitulo() {
+		return titulo;
+	}
+
 	public Livro(String titulo, String resumo, String sumario, Double preco, 
 			Integer numPaginas, String isbn, LocalDate dataPublicacao, Autor autor, Categoria categoria){
 		super();
@@ -62,6 +70,6 @@ public class Livro {
 	}
 	
 	public LivroDto converterDto(){
-		return new LivroDto(id, titulo);
+		return new LivroDto(Livro.this);
 	}
 }

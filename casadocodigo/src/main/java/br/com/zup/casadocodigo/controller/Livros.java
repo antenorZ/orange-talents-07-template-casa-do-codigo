@@ -1,15 +1,17 @@
 package br.com.zup.casadocodigo.controller;
 
+import java.util.List;
+
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
 import br.com.zup.casadocodigo.dto.LivroDto;
 import br.com.zup.casadocodigo.form.LivroForm;
 import br.com.zup.casadocodigo.model.Livro;
@@ -35,5 +37,11 @@ public class Livros {
 		Livro livro = livroForm.converter(autorRepository, categoriaRepository);
 		livroRepository.save(livro);
 		return ResponseEntity.status(HttpStatus.OK).body(livro.converterDto());
+	}
+	
+	@GetMapping
+	public List<LivroDto> lista() {
+		List<Livro> livros = livroRepository.findAll();
+		return LivroDto.converter(livros);
 	}
 }
