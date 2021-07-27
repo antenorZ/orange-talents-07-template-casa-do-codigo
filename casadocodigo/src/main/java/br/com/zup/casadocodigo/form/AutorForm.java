@@ -12,14 +12,14 @@ import br.com.zup.casadocodigo.model.Categoria;
 
 public class AutorForm {
 	
-	@NotNull @NotBlank
+	@NotBlank
 	private String nome;
 	
-	@Email @NotNull @NotBlank
+	@Email @NotBlank
 	@Unique(domainClass = Autor.class, fieldName = "email")
 	private String email;
 	
-	@NotNull @NotBlank @Length(max = 400)
+	@NotBlank @Length(max = 400)
 	private String descricao;
 
 	public AutorForm(String nome, String email, String descricao){
