@@ -3,9 +3,14 @@ package br.com.zup.casadocodigo.form;
 import java.time.LocalDate;
 
 import javax.validation.constraints.Future;
-import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+
+import org.hibernate.validator.constraints.Length;
+import org.springframework.format.annotation.DateTimeFormat;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
 
 import br.com.zup.casadocodigo.config.validation.Unique;
 import br.com.zup.casadocodigo.model.Autor;
@@ -15,31 +20,33 @@ import br.com.zup.casadocodigo.repository.AutorRepository;
 import br.com.zup.casadocodigo.repository.CategoriaRepository;
 
 public class LivroForm{
-	@NotBlank @Unique(domainClass = Livro.class, fieldName = "titulo")
+	@NotBlank @NotNull @Unique(domainClass = Livro.class, fieldName = "titulo")
 	private String titulo;
 	
-	@NotBlank @Max(value = 500)
+	@NotBlank @Length(max = 500)
 	private String resumo;
 	
 	private String sumario;
 	
-	@Min(value = 20)
+	@Min(value = 20) @NotNull 
 	private Double preco;
 	
-	@Min(value = 100)
+	@Min(value = 100) @NotNull 
 	private Integer numPaginas;
 	
-	@NotBlank @Unique(domainClass = Livro.class, fieldName = "isbn")
+	@NotBlank @NotNull @Unique(domainClass = Livro.class, fieldName = "isbn")
 	private String isbn;
 	
 	@Future
+	@JsonFormat(pattern = "dd/MM/yyyy", shape = JsonFormat.Shape.STRING)
+	@DateTimeFormat(pattern="dd/MM/yyyy")
 	private LocalDate dataPublicacao;
 	
-	@NotBlank
+	@NotBlank @NotNull
 	private String nomeAutor;
 	
-	@NotBlank
-	private String nomeCategoria;
+	@NotBlank @NotNull
+	private String nomeCategoria;	
 	
 	public String getTitulo() {
 		return titulo;
@@ -93,20 +100,20 @@ public class LivroForm{
 		return dataPublicacao;
 	}
 
-	public void setDataPublicacao(LocalDate dataPublicacao) {
-		this.dataPublicacao = dataPublicacao;
-	}
-
 	public String getNomeAutor() {
 		return nomeAutor;
 	}
 
-	public void setNomeAutor(String nomeAutor) {
-		this.nomeAutor = nomeAutor;
-	}
-
 	public String getNomeCategoria() {
 		return nomeCategoria;
+	}
+
+	public void setDataPublicacao(LocalDate dataPublicacao) {
+		this.dataPublicacao = dataPublicacao;
+	}
+
+	public void setNomeAutor(String nomeAutor) {
+		this.nomeAutor = nomeAutor;
 	}
 
 	public void setNomeCategoria(String nomeCategoria) {

@@ -9,6 +9,10 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import br.com.zup.casadocodigo.dto.LivroDto;
 
 @Entity
@@ -29,12 +33,14 @@ public class Livro {
 	
 	private String isbn;
 	
+	@JsonFormat(pattern = "dd/MM/yyyy", shape = JsonFormat.Shape.STRING)
+	@DateTimeFormat(pattern="dd/MM/yyyy")
 	private LocalDate dataPublicacao;
 	
 	@ManyToOne
 	private Autor autor;
 	
-	@OneToOne
+	@ManyToOne
 	private Categoria categoria;
 	
 	public Livro(){
@@ -50,7 +56,9 @@ public class Livro {
 		this.preco = preco;
 		this.numPaginas = numPaginas;
 		this.isbn = isbn;
-		this.dataPublicacao = dataPublicacao;	
+		this.dataPublicacao = dataPublicacao;
+		this.autor = autor;
+		this.categoria = categoria;
 	}
 	
 	public LivroDto converterDto(){
