@@ -9,6 +9,7 @@ import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.Length;
 import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.util.Assert;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 
@@ -123,6 +124,8 @@ public class LivroForm{
 	public Livro converter(AutorRepository autorRepository, CategoriaRepository categoriaRepository) {
 		Autor autor = autorRepository.findBynome(nomeAutor);
 		Categoria categoria = categoriaRepository.findBytitulo(nomeCategoria);
+		Assert.state(autor!=null,"Não foi encontrado autor com o nome especificado");
+		Assert.state(categoria!=null,"Não foi encontrada categoria com o nome especificado");
 		return new Livro(titulo, resumo, sumario, preco, numPaginas, isbn, dataPublicacao, autor, categoria);
 	}
 	
