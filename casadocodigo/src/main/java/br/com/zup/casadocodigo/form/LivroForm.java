@@ -50,8 +50,8 @@ public class LivroForm{
 	private Long idCategoria;	
 	
 	public Livro converter(AutorRepository autorRepository, CategoriaRepository categoriaRepository) {
-		Autor autor = autorRepository.getOne(idAutor);
-		Categoria categoria = categoriaRepository.getOne(idCategoria);
+		Autor autor = autorRepository.getById(idAutor);
+		Categoria categoria = categoriaRepository.getById(idCategoria);
 //		Assert.state(autor!=null,"Não foi encontrado autor com o nome especificado");
 //		Assert.state(categoria!=null,"Não foi encontrada categoria com o nome especificado");
 		return new Livro(titulo, resumo, sumario, preco, numPaginas, isbn, dataPublicacao, autor, categoria);

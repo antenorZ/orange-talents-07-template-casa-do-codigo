@@ -14,11 +14,10 @@ import javax.validation.Payload;
 @Constraint(validatedBy = UniqueCountryValidator.class)
 public @interface UniqueCountry {
 
-	String message() default "Já existe uma valor cadastrado para o campo especificado";
+	String message() default "Já existe uma estado cadastrado para o país especificado";
 	 
     Class<?>[] groups() default {};
  
     Class<? extends Payload>[] payload() default {};
-    
-//    String value() default "";
+        
 }
