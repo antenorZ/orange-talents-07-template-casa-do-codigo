@@ -38,7 +38,7 @@ public class Livros {
 	
 	@PostMapping
 	@Transactional
-	public ResponseEntity<LivroDto> criarCategorias(@RequestBody @Valid LivroForm livroForm){
+	public ResponseEntity<LivroDto> criarLivros(@RequestBody @Valid LivroForm livroForm){
 		Livro livro = livroForm.converter(autorRepository, categoriaRepository);
 		livroRepository.save(livro);
 		return ResponseEntity.status(HttpStatus.OK).body(livro.converterDto());

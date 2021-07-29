@@ -43,11 +43,19 @@ public class LivroForm{
 	@DateTimeFormat(pattern="dd/MM/yyyy")
 	private LocalDate dataPublicacao;
 	
-	@NotBlank @NotNull
-	private String nomeAutor;
+	@NotNull
+	private Long idAutor;
 	
-	@NotBlank @NotNull
-	private String nomeCategoria;	
+	@NotNull
+	private Long idCategoria;	
+	
+	public Livro converter(AutorRepository autorRepository, CategoriaRepository categoriaRepository) {
+		Autor autor = autorRepository.getOne(idAutor);
+		Categoria categoria = categoriaRepository.getOne(idCategoria);
+//		Assert.state(autor!=null,"Não foi encontrado autor com o nome especificado");
+//		Assert.state(categoria!=null,"Não foi encontrada categoria com o nome especificado");
+		return new Livro(titulo, resumo, sumario, preco, numPaginas, isbn, dataPublicacao, autor, categoria);
+	}
 	
 	public String getTitulo() {
 		return titulo;
@@ -101,32 +109,21 @@ public class LivroForm{
 		return dataPublicacao;
 	}
 
-	public String getNomeAutor() {
-		return nomeAutor;
+	public Long getIdAutor() {
+		return idAutor;
 	}
 
-	public String getNomeCategoria() {
-		return nomeCategoria;
+	public void setIdAutor(Long idAutor) {
+		this.idAutor = idAutor;
 	}
 
-	public void setDataPublicacao(LocalDate dataPublicacao) {
-		this.dataPublicacao = dataPublicacao;
+	public Long getIdCategoria() {
+		return idCategoria;
 	}
 
-	public void setNomeAutor(String nomeAutor) {
-		this.nomeAutor = nomeAutor;
+	public void setIdCategoria(Long idCategoria) {
+		this.idCategoria = idCategoria;
 	}
 
-	public void setNomeCategoria(String nomeCategoria) {
-		this.nomeCategoria = nomeCategoria;
-	}
-
-	public Livro converter(AutorRepository autorRepository, CategoriaRepository categoriaRepository) {
-		Autor autor = autorRepository.findBynome(nomeAutor);
-		Categoria categoria = categoriaRepository.findBytitulo(nomeCategoria);
-		Assert.state(autor!=null,"Não foi encontrado autor com o nome especificado");
-		Assert.state(categoria!=null,"Não foi encontrada categoria com o nome especificado");
-		return new Livro(titulo, resumo, sumario, preco, numPaginas, isbn, dataPublicacao, autor, categoria);
-	}
 	
 }
