@@ -3,6 +3,7 @@ package br.com.zup.casadocodigo.form;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
 
+import br.com.zup.casadocodigo.config.validation.CPFOrCNPJ;
 import br.com.zup.casadocodigo.config.validation.Exists;
 import br.com.zup.casadocodigo.config.validation.Unique;
 import br.com.zup.casadocodigo.model.Cliente;
@@ -22,6 +23,7 @@ public class ClienteForm {
 	private String email;
 	
 	@NotNull @Unique(domainClass = Cliente.class, fieldName = "documento")
+	@CPFOrCNPJ
 	private String documento;
 	
 	@NotNull

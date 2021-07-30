@@ -13,7 +13,7 @@ public class EstadoForm {
 	@NotNull
 	private String nome;
 	
-//	@UniqueCountry
+	@UniqueCountry
 	@NotNull
 	@Exists(domainClass = Pais.class, fieldName = "id")
 	private Long idPais;
