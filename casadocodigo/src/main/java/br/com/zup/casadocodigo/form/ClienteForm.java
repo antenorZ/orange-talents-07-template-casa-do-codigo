@@ -3,6 +3,7 @@ package br.com.zup.casadocodigo.form;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
 
+import br.com.zup.casadocodigo.config.validation.Exists;
 import br.com.zup.casadocodigo.config.validation.Unique;
 import br.com.zup.casadocodigo.model.Cliente;
 import br.com.zup.casadocodigo.model.Estado;
@@ -33,8 +34,10 @@ public class ClienteForm {
 	private String cidade;
 	
 	@NotNull
+	@Exists(domainClass = Pais.class, fieldName = "id")
 	private Long idPais;
 	
+//	@Exists(domainClass = Estado.class, fieldName = "id")
 	private Long idEstado;
 	
 	@NotNull

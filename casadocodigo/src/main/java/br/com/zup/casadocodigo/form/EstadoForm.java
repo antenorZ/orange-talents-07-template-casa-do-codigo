@@ -2,6 +2,7 @@ package br.com.zup.casadocodigo.form;
 
 import javax.validation.constraints.NotNull;
 
+import br.com.zup.casadocodigo.config.validation.Exists;
 import br.com.zup.casadocodigo.config.validation.UniqueCountry;
 import br.com.zup.casadocodigo.model.Estado;
 import br.com.zup.casadocodigo.model.Pais;
@@ -12,8 +13,9 @@ public class EstadoForm {
 	@NotNull
 	private String nome;
 	
-	@UniqueCountry
+//	@UniqueCountry
 	@NotNull
+	@Exists(domainClass = Pais.class, fieldName = "id")
 	private Long idPais;
 	
 	public EstadoForm(String nome, Long idPais) {

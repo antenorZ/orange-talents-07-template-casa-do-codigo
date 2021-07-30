@@ -13,10 +13,12 @@ import org.springframework.util.Assert;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 
+import br.com.zup.casadocodigo.config.validation.Exists;
 import br.com.zup.casadocodigo.config.validation.Unique;
 import br.com.zup.casadocodigo.model.Autor;
 import br.com.zup.casadocodigo.model.Categoria;
 import br.com.zup.casadocodigo.model.Livro;
+import br.com.zup.casadocodigo.model.Pais;
 import br.com.zup.casadocodigo.repository.AutorRepository;
 import br.com.zup.casadocodigo.repository.CategoriaRepository;
 
@@ -44,16 +46,16 @@ public class LivroForm{
 	private LocalDate dataPublicacao;
 	
 	@NotNull
+	@Exists(domainClass = Autor.class, fieldName = "id")
 	private Long idAutor;
 	
 	@NotNull
+	@Exists(domainClass = Categoria.class, fieldName = "id")
 	private Long idCategoria;	
 	
 	public Livro converter(AutorRepository autorRepository, CategoriaRepository categoriaRepository) {
 		Autor autor = autorRepository.getById(idAutor);
 		Categoria categoria = categoriaRepository.getById(idCategoria);
-//		Assert.state(autor!=null,"Não foi encontrado autor com o nome especificado");
-//		Assert.state(categoria!=null,"Não foi encontrada categoria com o nome especificado");
 		return new Livro(titulo, resumo, sumario, preco, numPaginas, isbn, dataPublicacao, autor, categoria);
 	}
 	

@@ -10,7 +10,7 @@ import javax.validation.ConstraintValidatorContext;
 
 import org.springframework.util.Assert;
 
-public class ExistsValidator implements ConstraintValidator<Exists, Object> {
+public class ExistsValidator implements ConstraintValidator<Exists, Long> {
 	
 	private String domainAttribute;
 	
@@ -26,10 +26,10 @@ public class ExistsValidator implements ConstraintValidator<Exists, Object> {
     }
  
     @Override
-    public boolean isValid(Object value, ConstraintValidatorContext context) {
+    public boolean isValid(Long value, ConstraintValidatorContext context) {
     	Query query = manager.createQuery("select 1 from " +klass.getName()+" where " +domainAttribute +"=:value");
     	query.setParameter("value", value);
     	List<?> list = query.getResultList();
-    	return list.contains(value);
+    	return !(list.isEmpty());
     }
 }
