@@ -40,7 +40,6 @@ public class DetalhesLivroDto {
 		this.dataPublicacao = livro.getDataPublicacao();
 		this.autor = livro.getAutor().getNome();
 		this.descricaoAutor = livro.getAutor().getDescricao();
-//		this.emailAutor = livro.getAutor().getEmail();
 		this.nomeCategoria = livro.getCategoria().getTitulo();
 	}
 

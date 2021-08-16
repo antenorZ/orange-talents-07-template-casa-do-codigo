@@ -29,7 +29,7 @@ public class ClienteForm {
 	@NotNull
 	private String endereco;
 	
-	@NotNull
+	
 	private String complemento;
 	
 	@NotNull
@@ -39,7 +39,7 @@ public class ClienteForm {
 	@Exists(domainClass = Pais.class, fieldName = "id")
 	private Long idPais;
 	
-//	@Exists(domainClass = Estado.class, fieldName = "id")
+	@Exists(domainClass = Estado.class, fieldName = "id")
 	private Long idEstado;
 	
 	@NotNull
